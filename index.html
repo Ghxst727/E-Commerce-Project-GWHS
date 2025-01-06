@@ -56,7 +56,7 @@
           <div class="card mb-4">
               <img src="https://placehold.co/100" class="card-img-top" alt="Product 1">
               <div class="card-body">
-                  <h5 class="card-title">Product 1</h5>
+                  <h5 class="card-title">${product.name}</h5>
                   <p class="card-text">$10.99</p>
                   <p class="card-text">Description for product 1</p>
                   <button class="btn btn-primary add-to-cart" data-id="1">Add to Cart</button>
@@ -75,8 +75,30 @@
       crossorigin="anonymous"
     ></script>
     <script>
+          const productList = document.getElementById('product-list');
+          let productHTML = "";
       document.addEventListener("DOMContentLoaded", function () {
-        
+      fetch('products.json')
+      .then(response => response.json() )
+      .then(data => {
+        // console.log(data);
+        data.products.forEach(product => {
+          console.log(product.name);
+          productHTML += 
+          `<div class="col-md-4">
+          <div class="card mb-4">
+              <img src=${product.image} class="card-img-top" alt="Product 1">
+              <div class="card-body">
+                  <h5 class="card-title">${product.name}</h5>
+                  <p class="card-text">${product.price}</p>
+                  <p class="card-text">${product.description}</p>
+                  <button class="btn btn-primary add-to-cart" data-id="1">Add to Cart</button>
+              </div>
+          </div>
+      </div>`;
+        });
+        productList.innerHTML = productHTML;
+      })  
         });
     </script>
   </body>
