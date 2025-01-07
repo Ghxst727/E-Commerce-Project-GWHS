@@ -90,16 +90,48 @@
               <img src=${product.image} class="card-img-top" alt="Product 1">
               <div class="card-body">
                   <h5 class="card-title">${product.name}</h5>
-                  <p class="card-text">${product.price}</p>
-                  <p class="card-text">${product.description}</p>
+                  <p class="card-text">$${product.price}</p>
+                  // <button type="button" class="btn" data-bs-toggle="popover" data-bs-title="Description" data-bs-content="HELLO">Description</button>
+                  // <br>
                   <button class="btn btn-primary add-to-cart" data-id="1">Add to Cart</button>
               </div>
           </div>
       </div>`;
         });
         productList.innerHTML = productHTML;
+        document.querySelectorAll('.add-to-cart').forEach((button) => {
+          button.addEventListener('click', addToCart );
+        })
       })  
         });
+
+
+        const cart = [];
+        function addToCart(event){
+          console.log(event.target.getAttribute('data-id'));
+          const productId = event.target.getAttribute('data-id');
+          const product = productsData[productId - 1];
+
+          let cartItem = {
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            image: product.image,
+          };
+          cart.push(cartItem);
+          console.log(cart);
+          renderCart();
+        }
+
+        function renderCart(){
+          const cartList = document.getElementById('cart-list');
+          let cartItem = '';
+          cart.forEach((product) => {
+            cartItem += '<p>${product.name}</p>';
+          });
+          cartList.innerHTML = cartItem;
+        }
     </script>
   </body>
 </html>

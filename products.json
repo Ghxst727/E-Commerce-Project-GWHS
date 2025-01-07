@@ -2,24 +2,66 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
-      "description": "Description for product 1",
-      "price": 10.99,
-      "image": "https://placehold.co/100"
+      "name": "MLS 25 NFHS Competition Ball",
+      "description": "Celebrate 20 years of adidas Major League Soccer balls. Created for match day, this Competition ball delivers pinpoint predictability thanks to its thermally bonded, seamless build and resilient butyl bladder. Taking inspiration from the official match ball of the 2025 MLS season, its design includes details from the balls that came before it.",
+      "price": 60,
+      "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/564814c7aefd48e386296e38e53139bb_9366/MLS_25_NFHS_Competition_Ball_White_JH1305_01_00_standard.jpg"
     },
     {
       "id": 2,
-      "name": "Product 2",
-      "description": "Description for product 2",
-      "price": 12.99,
-      "image": "https://placehold.co/100"
+      "name": "Tango Glider Ball",
+      "description": "Dribble, pass, shoot, repeat. This soccer ball is built for control. The machine-stitched body maintains a soft touch for predictable handling, and the synthetic materials and a butyl bladder maintain durability.",
+      "price": 25,
+      "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d30ada86204a48ef912ca7f500d2d487_9366/Tango_Glider_Ball_White_S12241_01_standard.jpg"
     },
     {
       "id": 3,
-      "name": "Product 3",
-      "description": "Description for product 3",
-      "price": 15.99,
-      "image": "https://placehold.co/100"
+      "name": "Argentina Anniversary Ball",
+      "description": "Part of a special collection that marks the 50th anniversary of Argentina and adidas first joining forces. This commemorative soccer has a smooth polyurethane cover with a special heritage-inspired badge. Whether you're honing your skills or kicking it around with friends, it's the perfect way for you to show your fandom.",
+      "price": 30,
+      "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/307cdbb9f12e41379e8ea11b1b53012a_9366/Argentina_Anniversary_Ball_White_JN3727_01_00_standard.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Women's Euro25 LGE Ball",
+      "description":"Take your passion for women's soccer onto the training pitch with this FIFA Quality certified Women's Euro25 League ball from adidas. Boasting a seamless TSBE construction, it's perfect for kickabouts and fine-tuning your skills. The striking, Switzerland-inspired design takes inspiration from the official match ball of UEFA Women's EURO25™.",
+      "price": 40,
+      "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/3f0d5db551e5440185daaafc3fb69b62_9366/Womens_Euro25_LGE_Ball_White_JH1262_01_00_standard.jpg"   
+    },
+    {
+      "id": 5,
+      "name": "MLS 24 Training Ball",
+      "description": "Celebrate the 30th anniversary of the USA's most prestigious soccer event. Showing off a design inspired by the MLS official match ball, this adidas Training ball is built for players serious about improving their game. Its machine-stitched construction and butyl bladder will hold strong, strike after strike and session after session.",
+      "price": 30,
+      "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2a8cefda94c246eb91adeb636a5910a8_9366/MLS_24_Training_Ball_White_IP1624_01_standard.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Icon Pro Ball",
+      "description": "Celebrate the rise of women's soccer with this limited-edition Pro ball at your feet. As the top international teams vied for the world title in 1999, they played with the colorful adidas Icon ball. This faithful recreation of that classic ball includes the original's US-inspired design.",
+      "price": 110,
+      "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/bfd0aec0c4f34c2da68b57bd90c60301_9366/Icon_Pro_Ball_White_IW5503_01_standard.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Tiro League Sala Ball",
+      "description": "This adidas Tiro League Sala Ball is a futsal-specific, size 3 ball created to encourage team passing and skills in a small space. The low bounce is designed for quick passing, and the seamless surface creates a great touch and feel. Whether you're just getting into futsal, are a seasoned pro or just want to improve your tricks, the Tiro League Sala Ball is the perfect way to improve your close-contact game and perfect your Tiki-Taka.",
+      "price": 45,
+      "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/39806b2f16834533bbc2aef500d90436_9366/Tiro_Pro_Ball_White_HT2428_01_standard.jpg"
+    },
+    {
+      "id": 8,
+      "name": "UWCL Pro 24/25 Group Stage Ball",
+      "description": "Reflecting the strength and dynamism of the competition's teams, the UWCL trophy's spiraling arms ensure it's instantly recognizable. Showing off a bold design inspired by those glittering features, this adidas Pro soccer is the one used in the group stages of the 24/25 tournament. Its seamless construction and embossed details will help you play like a champion.",
+      "price": 170,
+      "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/935dd6a3df3142948e1aca51cd300537_9366/UWCL_League_24-25_Group_Stage_Ball_White_IX4050_01_00_standard.jpg"
+    },
+    {
+      "id": 9,
+      "name": "MLS 25 Club Ball",
+      "description": "Celebrate 20 years of adidas Major League Soccer balls. Perfect for kickabouts, this Club football was created with a durable machine-stitched construction and tough TPU cover. Taking inspiration from the official match ball of the 2025 MLS season, its design includes details from the balls that came before it.",
+      "price": 30,
+      "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/ec33cef5380c4d088074ce8522389b30_9366/MLS_25_Club_Ball_Silver_JH1307_01_00_standard.jpg"
     }
   ]
 }
