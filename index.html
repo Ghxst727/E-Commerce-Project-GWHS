@@ -40,6 +40,8 @@
       </div>
     </nav>
 
+
+
     <div class="container mt-5">
       <h2>Cart</h2>
       <div id="cart-list">
@@ -74,16 +76,29 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <!-- <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/popper.min.js",
+        "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.esm.min.js"
+      }
+    }
+    </script> -->
     <script>
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
           const productList = document.getElementById('product-list');
+          let productsData = [];
           let productHTML = "";
       document.addEventListener("DOMContentLoaded", function () {
       fetch('products.json')
       .then(response => response.json() )
       .then(data => {
         // console.log(data);
+        productsData = data.products;
         data.products.forEach(product => {
-          console.log(product.name);
           productHTML += 
           `<div class="col-md-4">
           <div class="card mb-4">
@@ -91,47 +106,76 @@
               <div class="card-body">
                   <h5 class="card-title">${product.name}</h5>
                   <p class="card-text">$${product.price}</p>
-                  // <button type="button" class="btn" data-bs-toggle="popover" data-bs-title="Description" data-bs-content="HELLO">Description</button>
-                  // <br>
-                  <button class="btn btn-primary add-to-cart" data-id="1">Add to Cart</button>
+
+<button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+<br>
+
+                  <button class="btn btn-primary add-to-cart" data-id=${product.id}>Add to Cart</button>
               </div>
           </div>
       </div>`;
         });
         productList.innerHTML = productHTML;
-        document.querySelectorAll('.add-to-cart').forEach((button) => {
+        document.querySelectorAll('.add-to-cart').forEach
+        ((button) => {
           button.addEventListener('click', addToCart );
         })
       })  
         });
-
+        // function addToCart(event){
+        //   console.log('click');
+        // }
 
         const cart = [];
         function addToCart(event){
           console.log(event.target.getAttribute('data-id'));
           const productId = event.target.getAttribute('data-id');
           const product = productsData[productId - 1];
+          console.log(productId, product);
 
           let cartItem = {
             id: product.id,
             name: product.name,
-            description: product.description,
             price: product.price,
-            image: product.image,
+            quantity: product.quantity,
           };
           cart.push(cartItem);
           console.log(cart);
-          renderCart();
+           renderCart();
         }
 
         function renderCart(){
           const cartList = document.getElementById('cart-list');
           let cartItem = '';
           cart.forEach((product) => {
-            cartItem += '<p>${product.name}</p>';
+            cartItem += `
+                <div class="cart-item">
+                <h5>${cart[0].name}</h5>
+               <p>${cart[0].price} * ${cart[0].quantity}</p>
+               <button class "btn btn-secondary" data-id="1" onclick="increaseQ()">+</button>
+               <button class "btn btn-secondary" data-id="1" onclick="decreaseQ()">-</button>
+               <button class "btn btn-danger remove-from-cart" data-id="1">Remove</button>
+               </div>
+            `;
           });
           cartList.innerHTML = cartItem;
         }
+        function increaseQ(){
+          cart[0].quantity+1;
+          console.log(cart[0].quantity+1);
+        }
+
+
+
+        // <div class="btn-group">
+//   <button type="button" class="btn btn-danger">Description</button>
+//   <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+//     <span class="visually-hidden">Toggle Dropdown</span>
+//   </button>
+// <p class="dropdown-menu">${product.description}</p>
+// </div>
     </script>
   </body>
 </html>
+
+

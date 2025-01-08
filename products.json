@@ -4,6 +4,7 @@
       "id": 1,
       "name": "MLS 25 NFHS Competition Ball",
       "description": "Celebrate 20 years of adidas Major League Soccer balls. Created for match day, this Competition ball delivers pinpoint predictability thanks to its thermally bonded, seamless build and resilient butyl bladder. Taking inspiration from the official match ball of the 2025 MLS season, its design includes details from the balls that came before it.",
+      "quantity":1,
       "price": 60,
       "image": "https://assets.adidas.com/images/w_600,f_auto,q_auto/564814c7aefd48e386296e38e53139bb_9366/MLS_25_NFHS_Competition_Ball_White_JH1305_01_00_standard.jpg"
     },
