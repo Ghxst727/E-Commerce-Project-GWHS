@@ -41,38 +41,48 @@
     </nav>
 
     <div class="container mt-5">
-      <form action="checkout.html" method="get">
-        <h2>Cart</h2>
-        <div id="cart-list"></div>
-        <button class="btn btn-primary" id="checkout-button" type="submit">
-          Checkout
-        </button>
-      </form>
+      <h2>Cart</h2>
+      <div id="cart-list">
+        <!-- Cart items will be dynamically inserted here -->
+ <!-- new code here -->
+<!-- 
+<div class="cart-item"></div>
+<h5>Product 1</h5>
+<p> $10.99 x 2</p>
+<button class ="btn btn-secondary increase-quantity"
+data-id="1">
+     +
+     </button>
+     <button class ="btn btn-secondary decrease-quantity"
+data-id="1">
+     -
+     </button>
+     <button class ="btn btn-danger remove-from-cart"
+data-id="1">
+     Remove
+     </button>
+     </div> -->
+        <!-- Newcode finished -->
+
+      </div>
+      <button class="btn btn-primary" id="checkout-button">Checkout</button>
     </div>
 
     <div class="container mt-5">
-      <h1>Products</h1>
-      <div class="row" id="product-list">
-        <!-- Products will be dynamically inserted here -->
-        <div class="col-md-4">
-          <div class="card mb-4">
-            <img
-              src="https://placehold.co/100"
-              class="card-img-top"
-              alt="Product 1"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Product 1</h5>
-              <p class="card-text">$10.99</p>
-              <p class="card-text">Description for product 1</p>
-              <button class="btn btn-primary add-to-cart" data-id="1">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <form action="checkout.html" method= "get">
+<label for="firstName">First Name</label>
+<input type="text" name="firstName"value="" /><br />
+<label for="lastName">Last Name</label>
+<input type="text" name="lasttName" value="" /><br />
+<input type="hidden" name="hiddenvalue" value="Secret" />
+<button type="submit">Submit</button>
+</form>
     </div>
+
+    <!-- ehfbdf -->
+
+
+    <!-- erjfrgurw -->
 
     <footer class="bg-light text-center py-3">
       <p>&copy; 2025 E-commerce Website. All rights reserved.</p>
@@ -107,19 +117,20 @@
       </div>`;
             });
             productList.innerHTML = productHTML;
-            document.querySelectorAll(".add-to-cart").forEach((button) => {
-              button.addEventListener("click", addToCart);
+            document.querySelectorAll('.add-to-cart').forEach
+            ((button) => {
+              button.addEventListener('click', addToCart);
             });
           });
 
         //code update
         const cart = [];
 
-        // add cart product
+        // add cart product 
         function addToCart(event) {
-          console.log("clicky");
+          console.log('clicky');
           const productId = event.target.getAttribute("data-id");
-          const product = productsData[productId - 1];
+          const product = productsData[productId - 1]; 
 
           let cartItem = {
             name: product.name,
@@ -130,36 +141,48 @@
           console.log(cart);
           renderCart();
         }
+        
+
 
         function renderCart() {
-          const cartList = document.getElementById("cart-list");
-          let cartItem = "";
+          const cartList = document.getElementById('cart-list');
+          let cartItem = '';
           cart.forEach((product) => {
             cartItem += `
-           <div class="cart-item">
-          <h5>${product.name}</h5>
-          <p> $${product.price} x 1</p>
-          <input type="hidden" name= "id" value="${product.id}"/>
-         <input type ="hidden" name="name" value="${product.name}"/>
-         <input type="hidden" name="price" value="${product.price}" />
-        <button class ="btn btn-danger remove-from-cart" data-id="${product.id}">
-          Remove
-        </button>
-      </div>`;
+   
+    <div class="cart-item"></div>
+      <h5>${product.name}}</h5>
+<p> ${product.price}</p>
+<button class ="btn btn-secondary increase-quantity"
+data-id="${product.id}">
+     +
+     </button>
+     <button class ="btn btn-secondary decrease-quantity"
+data-id="${product.id}">
+     -
+     </button>
+     <button class ="btn btn-danger remove-from-cart"
+data-id="${product.id}">
+     Remove
+     </button>
+     </div>      
+            `;
           });
-          cartList.innerHTML = cartItem;
-          document.querySelectorAll(".remove-from-cart").forEach((button) => {
-            button.addEventListener("click", removeFromCart);
+                      cartList.innerHTML = cartItem;
+          document.querySelectorAll('.remove-from-cart').forEach((button) => {
+            button.addEventListener('click', removeFromCart);
           });
-
-          function removeFromCart(event) {
-            const productId = event.target.getAttribute("data-id");
+      
+          
+           
+          function removeFromCart(event){
+            const productId = event.target.getAttribute('data-id');
             const productIndex = cart.findIndex(
-              (product) => product.id == productId
+              (product) => product.id == productId,
             );
             cart.splice(productIndex, 1);
             renderCart();
-            console.log("Your product has been removed");
+            console.log('Your product has been removed');
           }
         }
       });
