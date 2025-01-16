@@ -42,7 +42,7 @@
 
 
     <div class="container mt-5">
-      <form action="confirmation.html" method="get">
+      <form id="checkout-form" action="confirmation.html" method="get">
       <h1>Checkout</h1>
       <div id="cart-summary">
         <!-- Cart summary will be dynamically inserted here -->
@@ -214,17 +214,59 @@
         cartSummary.innerHTML += `<p>Tax (15%): $${parseFloat(tax).toFixed(2)}</p>`;
         cartSummary.innerHTML += `<p>Total: $${parseFloat(total).toFixed(2)}</p>`;
 
+        document
+          .querySelector('#checkout-form')
+          .addEventListener('submit', submitCart);
 
+        function submitCart(event) {
+          event.preventDefault();
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+
+          const address = document.getElementById('address').value;
+          const apartment = document.getElementById('apartment').value;
+          const city = document.getElementById('city').value;
+          const state = document.getElementById('state').value;
+          const zipCode = document.getElementById('zip').value;
+          let shippingAddress = "";
+
+          if(apartment != ""){
+             shippingAddress += `<p>${address}, Apt ${apartment}, ${city}, ${state}, ${zipCode}</p>`
+          }else{
+            shippingAddress += `<p>${address}, ${city}, ${state}, ${zipCode}</p>`
+          }
+           console.log(shippingAddress);
+
+          
+          console.log('submitted');
+          fetch('users.json')
+            .then(response => response.json())
+            .then(data => {
+              data.forEach(user => {
+
+                if(Object.values(user).includes(email)){
+                if (Object.values(user).includes(password)) {
+                    console.log("Correct");
+                    
+                    localStorage.setItem('cartItm', cartItem);
+                    localStorage.setItem('ttl', total);
+                    localStorage.setItem('shAdd', shippingAddress);
+                    localStorage.setItem('gmail', email.value);
+                    window.location.href = "confirmation.html";
+                  } else {
+                    alert("Incorrect password");
+                  }
+                }else{
+                  alert("Incorrect email");
+                }
+
+              });
+            });
+        }
 
       });
-              let checkoutForm = document.getElementById('checkout-form');
-        checkoutForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const data = new FormData(checkoutForm);
-          for (const [name, value] of data) {
-            console.log(name, ":", value)
-          }
-        })
+
+        
     </script>
   </body>
 </html>

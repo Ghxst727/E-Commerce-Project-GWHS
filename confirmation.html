@@ -53,42 +53,20 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const urlParams = new URLSearchParams(window.location.search);
         const orderSummary = document.getElementById('order-summary');
-        
-         const ids = urlParams.getAll('id');
-        const names = urlParams.getAll('name');
-        const prices = urlParams.getAll('price');
-        const cartItems = [];
-        let cartItem = '';
 
-        let subTotal = 0;
-        let tax = 0.15;
-        let total = 0;
+       
+        var cartItem = localStorage.getItem('cartItm');
+        var total = localStorage.getItem('ttl');
+        var shippingAddress = localStorage.getItem('shAdd');
+        var email = localStorage.getItem('gmail');
 
-        for (let i = 0; i < ids.length; i++) {
-          cartItem += `
-          <div>
-            <h5>${names[i]}</h5>
-            <p>$${prices[i]}</p>
-            <input type="hidden" name="id" value="${ids[i]}">
-            <input type="hidden" name="name" value="${names[i]}">
-            <input type="hidden" name="price" value="${prices[i]}">
-          </div>
-          `;
-          subTotal += parseInt(prices[i]);
-        }
-
-        tax *= subTotal;
-        total = tax + subTotal
-
-        orderSummary.innerHTML = cartItem;
-        orderSummary.innerHTML += `<p>Subtotal: $${parseFloat(subTotal).toFixed(2)}</p>`;
-        orderSummary.innerHTML += `<p>Tax (15%): $${parseFloat(tax).toFixed(2)}</p>`;
-        orderSummary.innerHTML += `<p>Total: $${parseFloat(total).toFixed(2)}</p>`;
+        orderSummary.innerHTML += cartItem;
+        orderSummary.innerHTML += total;
+        orderSummary.innerHTML += shippingAddress;
+        orderSummary.innerHTML += email;
       
-      let checkoutForm = document.getElementById('checkout-form');
-        console.log(checkoutForm);
+        
       });
 
 
