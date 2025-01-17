@@ -92,100 +92,93 @@ data-id="1">
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const productList = document.querySelector("#product-list");
-        let productsData = [];
-        let productHTML = "";
-        fetch("products.json")
-          .then((response) => response.json())
-          .then((data) => {
-            // console.log(data)
-            productsData = data.products;
-            data.products.forEach((product) => {
-              console.log(product.name);
-              productHTML += `<div class="col-md-4">
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Getting the html div into javascript
+    const productList = document.querySelector("#product-list");
+    let productsData = [];
+    let productHTML = "";
+    // Making the json products into cards
+    fetch("products.json")
+    .then((response) => response.json())
+    .then((data) => {
+      productsData = data.products;
+      data.products.forEach((product) => {
+        productHTML += `
+        <div class="col-md-4">
           <div class="card mb-4">
-              <img src=${product.image} class="card-img-top" alt="Product 1">
-              <div class="card-body">
-                  <h5 class="card-title">${product.name}</h5>
-                  <p class="card-text">${product.price}</p>
-                  <p class="card-text">${product.description}</p>
-                  <button class="btn btn-primary add-to-cart" data-id=${product.id}>Add to Cart</button>
-              </div>
+            <img src=${product.image} class="card-img-top" alt="Product 1">
+            <div class="card-body">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">${product.price}</p>
+              <p class="card-text">${product.description}</p>
+              <button class="btn btn-primary add-to-cart" data-id=${product.id}>Add to Cart</button>
+            </div>
           </div>
-      </div>`;
-            });
-            productList.innerHTML = productHTML;
-            document.querySelectorAll('.add-to-cart').forEach
-            ((button) => {
-              button.addEventListener('click', addToCart);
-            });
-          });
-
-        //code update
-        const cart = [];
-
-        // add cart product 
-        function addToCart(event) {
-          console.log('clicky');
-          const productId = event.target.getAttribute("data-id");
-          const product = productsData[productId - 1]; 
-
-          let cartItem = {
-            name: product.name,
-            price: product.price,
-            id: product.id,
-          };
-          cart.push(cartItem);
-          console.log(cart);
-          renderCart();
-        }
-        
-
-
-        function renderCart() {
-          const cartList = document.getElementById('cart-list');
-          let cartItem = '';
-          cart.forEach((product) => {
-            cartItem += `
-   
-    <div class="cart-item"></div>
-      <h5>${product.name}}</h5>
-<p> ${product.price}</p>
-<button class ="btn btn-secondary increase-quantity"
-data-id="${product.id}">
-     +
-     </button>
-     <button class ="btn btn-secondary decrease-quantity"
-data-id="${product.id}">
-     -
-     </button>
-     <button class ="btn btn-danger remove-from-cart"
-data-id="${product.id}">
-     Remove
-     </button>
-     </div>      
-            `;
-          });
-                      cartList.innerHTML = cartItem;
-          document.querySelectorAll('.remove-from-cart').forEach((button) => {
-            button.addEventListener('click', removeFromCart);
-          });
-      
-          
-           
-          function removeFromCart(event){
-            const productId = event.target.getAttribute('data-id');
-            const productIndex = cart.findIndex(
-              (product) => product.id == productId,
-            );
-            cart.splice(productIndex, 1);
-            renderCart();
-            console.log('Your product has been removed');
-          }
-        }
+        </div>`;
       });
+      // Displaying them in the html div
+      productList.innerHTML = productHTML;
+      // Giving an add-to-cart button to each card
+      document.querySelectorAll('.add-to-cart').forEach
+      ((button) => {
+        button.addEventListener('click', addToCart);
+      });
+    });
+    const cart = [];
+    // Adding the card info to the cart
+    function addToCart(event) {
+      const productId = event.target.getAttribute("data-id");
+      const product = productsData[productId - 1]; 
+      let cartItem = {
+        name: product.name,
+        price: product.price,
+        id: product.id,
+      };
+      cart.push(cartItem);
+      console.log(cart);
+      renderCart();
+    }
+    function renderCart() {
+      const cartList = document.getElementById('cart-list');
+      let cartItem = '';
+      cart.forEach((product) => {
+        cartItem += `
+          <div class="cart-item"></div>
+          <h5>${product.name}}</h5>
+          <p> ${product.price}</p>
+          <button class ="btn btn-secondary increase-quantity"
+          data-id="${product.id}">
+          +
+          </button>
+          <button class ="btn btn-secondary decrease-quantity"
+          data-id="${product.id}">
+          -
+          </button>
+          <button class ="btn btn-danger remove-from-cart"
+          data-id="${product.id}">
+          Remove
+          </button>
+          </div>      
+        `;
+      });
+            // Displaying them into the cart div along with a remove button
+      cartList.innerHTML = cartItem;
+      document.querySelectorAll('.remove-from-cart').forEach((button) => {
+        button.addEventListener('click', removeFromCart);
+      });
+      // Adding the remove button to each cart item
+      function removeFromCart(event){
+        const productId = event.target.getAttribute('data-id');
+        const productIndex = cart.findIndex(
+          (product) => product.id == productId,
+        );
+        cart.splice(productIndex, 1);
+        renderCart();
+        console.log('Your product has been removed');
+      }
+    }
+  });
     </script>
   </body>
 </html>

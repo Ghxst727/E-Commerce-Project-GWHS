@@ -179,6 +179,7 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        // Transfering all the html elements from index.html
         const urlParams = new URLSearchParams(window.location.search);
         const cartSummary = document.getElementById('cart-summary');
         console.log(urlParams);
@@ -187,11 +188,11 @@
         const prices = urlParams.getAll('price');
         const cartItems = [];
         let cartItem = '';
-
+        // Calculating Tax
         let subTotal = 0;
         let tax = 0.15;
         let total = 0;
-
+        // Creating the html element for every item in the cart
         for(let i = 0; i < ids.length; i++){
           cartItem += `
           <div>
@@ -204,54 +205,50 @@
           `;
           subTotal+= parseInt(prices[i]);
         }
-
+        // Tax again
         tax *= subTotal;
         total = tax+subTotal
-        
-
+        // Displaying the html elements to the page
         cartSummary.innerHTML = cartItem;
         cartSummary.innerHTML += `<p>Subtotal: $${parseFloat(subTotal).toFixed(2)}</p>`;
         cartSummary.innerHTML += `<p>Tax (15%): $${parseFloat(tax).toFixed(2)}</p>`;
         cartSummary.innerHTML += `<p>Total: $${parseFloat(total).toFixed(2)}</p>`;
-
+        // Allowing you to submit your information
         document
           .querySelector('#checkout-form')
           .addEventListener('submit', submitCart);
-
+        // Transfering all the values entered into javascript variables
         function submitCart(event) {
           event.preventDefault();
+          // Login info
           const email = document.getElementById('email').value;
           const password = document.getElementById('password').value;
-
+          // Address info
           const address = document.getElementById('address').value;
           const apartment = document.getElementById('apartment').value;
           const city = document.getElementById('city').value;
           const state = document.getElementById('state').value;
           const zipCode = document.getElementById('zip').value;
           let shippingAddress = "";
-
+          // Formatting the values into an address format
           if(apartment != ""){
              shippingAddress += `<p>${address}, Apt ${apartment}, ${city}, ${state}, ${zipCode}</p>`
           }else{
             shippingAddress += `<p>${address}, ${city}, ${state}, ${zipCode}</p>`
           }
-           console.log(shippingAddress);
-
-          
-          console.log('submitted');
+          // Checking if login is correct.
           fetch('users.json')
             .then(response => response.json())
             .then(data => {
               data.forEach(user => {
-
                 if(Object.values(user).includes(email)){
                 if (Object.values(user).includes(password)) {
                     console.log("Correct");
-                    
+                    // Transfering the window & info to another page
                     localStorage.setItem('cartItm', cartItem);
                     localStorage.setItem('ttl', total);
                     localStorage.setItem('shAdd', shippingAddress);
-                    localStorage.setItem('gmail', email.value);
+                    localStorage.setItem('mail', email);
                     window.location.href = "confirmation.html";
                   } else {
                     alert("Incorrect password");
@@ -259,14 +256,10 @@
                 }else{
                   alert("Incorrect email");
                 }
-
               });
             });
         }
-
       });
-
-        
     </script>
   </body>
 </html>

@@ -53,25 +53,20 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        // Making the html div a javascript element 
         const orderSummary = document.getElementById('order-summary');
-
-       
+        // Storing the values transfered from checkout.html
         var cartItem = localStorage.getItem('cartItm');
         var total = localStorage.getItem('ttl');
         var shippingAddress = localStorage.getItem('shAdd');
-        var email = localStorage.getItem('gmail');
-
+        var email = localStorage.getItem('mail');
+        // Displaying the transfered values in the div
         orderSummary.innerHTML += cartItem;
-        orderSummary.innerHTML += total;
-        orderSummary.innerHTML += shippingAddress;
-        orderSummary.innerHTML += email;
-      
-        
+        orderSummary.innerHTML += `<p>Total: $${parseFloat(total).toFixed(2)}</p>`;
+        orderSummary.innerHTML += `<h4>Shipping Address</h4>
+        ${shippingAddress}`;
+        orderSummary.innerHTML += `<h4>Email</h4> ${email} <p></p>`;
       });
-
-
-
-      
     </script>
   </body>
 </html>
