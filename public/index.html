@@ -36,6 +36,12 @@
           <li class="nav-item">
             <a class="nav-link" href="confirmation.html">Confirmation</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="register.html">Register</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -82,19 +88,19 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Getting the html div into javascript
-    const productList = document.querySelector("#product-list");
-    let productsData = [];
-    let productHTML = "";
-    // Making the json products into cards
-    fetch("products.json")
-      .then((response) => response.json())
-      .then((data) => {
-        productsData = data.products;
-        data.products.forEach((product) => {
-          productHTML += `
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Getting the html div into javascript
+        const productList = document.querySelector("#product-list");
+        let productsData = [];
+        let productHTML = "";
+        // Making the json products into cards
+        fetch("products.json")
+          .then((response) => response.json())
+          .then((data) => {
+            productsData = data.products;
+            data.products.forEach((product) => {
+              productHTML += `
             <div class="col-md-4">
               <div class="card mb-4">
                 <img src=${product.image} class="card-img-top" alt="Product 1">
@@ -106,34 +112,33 @@
                 </div>
               </div>
             </div>`;
-        });
-        // Displaying them in the html div
-        productList.innerHTML = productHTML;
-        // Giving an add-to-cart button to each card
-        document.querySelectorAll('.add-to-cart').forEach
-        ((button) => {
-          button.addEventListener('click', addToCart);
-        });
-      });
-    const cart = [];
-    // Adding the card info to the cart
-    function addToCart(event) {
-      const productId = event.target.getAttribute("data-id");
-      const product = productsData[productId - 1];
-      let cartItem = {
-        name: product.name,
-        price: product.price,
-        id: product.id,
-      };
-      cart.push(cartItem);
-      console.log(cart);
-      renderCart();
-    }
-    function renderCart() {
-      const cartList = document.getElementById('cart-list');
-      let cartItem = '';
-      cart.forEach((product) => {
-        cartItem += `
+            });
+            // Displaying them in the html div
+            productList.innerHTML = productHTML;
+            // Giving an add-to-cart button to each card
+            document.querySelectorAll(".add-to-cart").forEach((button) => {
+              button.addEventListener("click", addToCart);
+            });
+          });
+        const cart = [];
+        // Adding the card info to the cart
+        function addToCart(event) {
+          const productId = event.target.getAttribute("data-id");
+          const product = productsData[productId - 1];
+          let cartItem = {
+            name: product.name,
+            price: product.price,
+            id: product.id,
+          };
+          cart.push(cartItem);
+          console.log(cart);
+          renderCart();
+        }
+        function renderCart() {
+          const cartList = document.getElementById("cart-list");
+          let cartItem = "";
+          cart.forEach((product) => {
+            cartItem += `
           <div class="cart-item">
             <h5>${product.name}</h5>
             <p> $${product.price} x 1</p>
@@ -144,24 +149,24 @@
             Remove
             </button>
           </div>`;
+          });
+          // Displaying them into the cart div along with a remove button
+          cartList.innerHTML = cartItem;
+          document.querySelectorAll(".remove-from-cart").forEach((button) => {
+            button.addEventListener("click", removeFromCart);
+          });
+          // Adding the remove button to each cart item
+          function removeFromCart(event) {
+            const productId = event.target.getAttribute("data-id");
+            const productIndex = cart.findIndex(
+              (product) => product.id == productId
+            );
+            cart.splice(productIndex, 1);
+            renderCart();
+            console.log("Your product has been removed");
+          }
+        }
       });
-      // Displaying them into the cart div along with a remove button
-      cartList.innerHTML = cartItem;
-      document.querySelectorAll('.remove-from-cart').forEach((button) => {
-        button.addEventListener('click', removeFromCart);
-      });
-      // Adding the remove button to each cart item
-      function removeFromCart(event) {
-        const productId = event.target.getAttribute('data-id');
-        const productIndex = cart.findIndex(
-          (product) => product.id == productId,
-        );
-        cart.splice(productIndex, 1);
-        renderCart();
-        console.log('Your product has been removed');
-      }
-    }
-  });
-</script>
+    </script>
   </body>
 </html>
